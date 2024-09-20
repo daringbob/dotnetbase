@@ -1,0 +1,3 @@
+[src/Migrations/**/*.cs]
+# Suppress all warnings for files in the Migrations folder
+dotnet_diagnostic.CS8981.severity = none

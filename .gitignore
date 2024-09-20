@@ -1,0 +1,58 @@
+# .NET
+**/bin/
+**/obj/
+**/out/
+
+# Build results
+*.log
+*.vspscc
+*.vssscc
+_ReSharper*
+*.user
+*.rsuser
+*.suo
+*.cache
+*.ilk
+*.ncb
+*.aps
+*.sln.docstates
+*.sdf
+*.opensdf
+*.tlog
+*.v12.suo
+*.pdb
+*.ipch
+*.obj
+*.o
+*.lst
+*.DS_Store
+Thumbs.db
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.userprefs
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+.fake
+
+# Migrations
+**/Migrations/
+
+**/Store

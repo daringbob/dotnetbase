@@ -1,0 +1,135 @@
+# Install extension: REST Client 
+### login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "UserName": "admin",
+  "Password": "admin"
+}
+
+### USER
+# Get
+GET http://localhost:5000/odata/users
+Accept: application/json;
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzIzNDQzODM0LCJleHAiOjE3MjQwNDg2MzQsImlhdCI6MTcyMzQ0MzgzNCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.vlz-AJEVd5mpwvBZSjoZ0ZP5jwwj4fsagL4znpaoiN4
+###
+
+# Create
+POST http://localhost:5000/odata/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzIzNDQzODM0LCJleHAiOjE3MjQwNDg2MzQsImlhdCI6MTcyMzQ0MzgzNCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.vlz-AJEVd5mpwvBZSjoZ0ZP5jwwj4fsagL4znpaoiN4
+
+# {
+#   "code": "100001",
+#   "firstName": "Nguyễn Phước",
+#   "lastName": "Lợi",
+#   "fullName": "Nguyễn Phước Lợi",
+#   "email": "nguyenphuocloi@gmail.com",
+#   "phone": "0908070504",
+#   "positionTitle": "Product Development Manager",
+#   "isActive": true,
+#   "employeeType": {
+#     "title": "TypeA",
+#     "employeeTypeName": "EmployeeTypeA",
+#     "status": "Activated"
+#   },
+#   "managerId": 1,
+#   "departmentId": null,
+#   "workLocationId": 1
+# }
+
+
+# {
+#   "code": "100002",
+#   "firstName": "TEST",
+#   "lastName": "TEST",
+#   "fullName": "TEST TEST",
+#   "email": "testtest@abc.com",
+#   "phone": "0908070504",
+#   "positionTitle": "QA Director",
+#   "isActive": true,
+#   "employeeType": {
+#     "title": "TypeB",
+#     "employeeTypeName": "EmployeeTypeB",
+#     "status": "Activated"
+#   },
+#   "managerId": 1,
+#   "departmentId": null,
+#   "workLocationId": 1,
+#   "created": "2022-01-01T00:00:00Z",
+#   "modified": "2022-01-01T00:00:00Z"
+# }
+
+# {
+#   "code": "100003",
+#   "firstName": "Test A",
+#   "lastName": "Test A",
+#   "fullName": "Test A",
+#   "email": "testa@abc.com",
+#   "phone": "0908070504",
+#   "positionTitle": "string",
+#   "isActive": true,
+#   "employeeTypeId": 1,
+#   "managerId": 1,
+#   "departmentId": null,
+#   "workLocationId": 1,
+#   "created": "2022-01-01T00:00:00Z",
+#   "modified": "2022-01-01T00:00:00Z"
+# }
+
+{
+  "code": "100005",
+  "firstName": "abc",
+  "lastName": "123",
+  "fullName": "abc 123",
+  "email": "abc123@abc.com",
+  "phone": "0908070504",
+  "positionTitle": "QA Director",
+  "isActive": true,
+  "employeeTypeId": 2,
+  "managerId": 3,
+  "departmentId": null,
+  "workLocationId": 1
+}
+###
+# Create
+POST http://localhost:5000/odata/accounts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzIzNDQzODM0LCJleHAiOjE3MjQwNDg2MzQsImlhdCI6MTcyMzQ0MzgzNCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.vlz-AJEVd5mpwvBZSjoZ0ZP5jwwj4fsagL4znpaoiN4
+
+{
+  "UserName": "abc",
+  "Password": "abc",
+  "User": {
+    "FullName": "demo"
+  }
+}
+###
+
+# GET by id
+GET http://localhost:5000/odata/users(4)
+Accept: application/json;
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzIzNDQzODM0LCJleHAiOjE3MjQwNDg2MzQsImlhdCI6MTcyMzQ0MzgzNCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.vlz-AJEVd5mpwvBZSjoZ0ZP5jwwj4fsagL4znpaoiN4
+###
+
+# Update
+PATCH http://localhost:5000/odata/users(4)
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzIzNDQzODM0LCJleHAiOjE3MjQwNDg2MzQsImlhdCI6MTcyMzQ0MzgzNCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.vlz-AJEVd5mpwvBZSjoZ0ZP5jwwj4fsagL4znpaoiN4
+
+{
+  "FullName": "demo 2",
+  "IsActive": false
+}
+###
+
+# Update
+PATCH http://localhost:5000/odata/users(4)
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzIzNDQzODM0LCJleHAiOjE3MjQwNDg2MzQsImlhdCI6MTcyMzQ0MzgzNCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.vlz-AJEVd5mpwvBZSjoZ0ZP5jwwj4fsagL4znpaoiN4
+
+{
+  "FullName": "demo 2",
+  "IsActive": true
+}

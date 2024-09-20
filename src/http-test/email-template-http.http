@@ -1,0 +1,48 @@
+# Install extension: REST Client 
+
+### Email Template
+# Get
+GET http://localhost:5000/odata/emailtemplates
+Accept: application/json;
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+###
+
+# Create
+POST http://localhost:5000/odata/emailtemplates
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+{
+  "TemplateID": "ET-002",
+  "Template": "<p>Xin chào, [[Name]]!</p> <p>Đây là email tự động vào lúc: [[Time]]</p> <p>Nội dung email như sau: [[Message]]</p>"
+}
+###
+
+# GET by id
+GET http://localhost:5000/odata/emailtemplates(1)
+Accept: application/json;
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+###
+
+# Update
+PATCH http://localhost:5000/odata/emailtemplates(1)
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+{
+  "Template": "<p>Xin chào, [[Name]]!</p> <p>Nội dung email như sau: [[Message]]</p>"
+}
+###
+
+# Get
+GET http://localhost:5000/odata/emailtemplates?$filter=contains(TemplateId, 'ET-001')
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+
+
+
+
+
+

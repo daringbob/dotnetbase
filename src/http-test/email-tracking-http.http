@@ -1,0 +1,51 @@
+# Install extension: REST Client 
+
+### Email Tracking
+# Get
+GET http://localhost:5000/odata/emailtrackings
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+###
+
+# Create
+POST http://localhost:5000/odata/emailtrackings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+
+{
+  "EmailFrom": "nhanleluthien@gmail.com",
+  "ToEmails": "leluthiennhan31@gmail.com;lltnhan@cmctssg.info",
+  "Subject": "Test Subject",
+  "Body": "Đây là 1 test body cho api create email tracking.",
+  "TemplateId": "N/A", 
+  "CcEmails": null,
+  "BccEmails": null,
+  "Priority": "Normal"
+}
+###
+
+# GET by id
+GET http://localhost:5000/odata/emailtrackings(1)
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+###
+
+# Update
+PATCH http://localhost:5000/odata/emailtrackings(3)
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+
+{
+  "Subject": "Updated Subject",
+  "Body": "Đây là 1 test body cho api update email tracking."
+}
+###
+
+# Get Email Trackings by ToEmails
+GET http://localhost:5000/odata/emailtrackings?$filter=contains(ToEmails, 'leluthiennhan31@gmail.com')
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE

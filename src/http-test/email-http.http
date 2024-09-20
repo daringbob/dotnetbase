@@ -1,0 +1,159 @@
+# Install extension: REST Client 
+# Lưu ý: 
+# 1. Luôn phải có ToEmails và Subject
+# 2. Phải có Body hoặc [TemplaeId và Replacements] mới gửi được (Nếu có cả 2 thì ưu tiên Body)
+# 3. Các thuộc tính khác có hay không cũng được
+# 4. Priority nếu không có mặc định là Normal (có 3 mức: High, Normal, Low)
+
+# Send Mail Raw
+POST http://localhost:5000/api/email/send
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+{
+  "ToEmails": "leluthiennhan31@gmail.com",
+  "Subject": "Test Email 2",
+  "TemplateId": "ET-003",
+  "Replacements": {
+    "Name": "Nhan",
+    "Message": "Xin chào đây là email ET-001 có kèm file"
+  },
+  "IsTest": false,
+  "CcEmails": "leluthiennhan30@gmail.com;lltnhan@cmctssg.info"
+  
+}
+###
+
+# Send Mail Raw 2
+POST http://localhost:5000/api/email/send
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+{
+  "ToEmails": "lltnhan@cmctssg.info",
+  "Subject": "Test Email",
+  "Body": "Xin chào đây là email không xài template",
+  "IsTest": false,
+  "RefId": "11111",
+  "DataSource": "33333"
+}
+###
+
+# Send Mail With Priority
+POST http://localhost:5000/api/email/send
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzI0MjA5MzYzLCJleHAiOjE3MjQ4MTQxNjMsImlhdCI6MTcyNDIwOTM2MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI4OS8iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg5LyJ9.GbrAN-JPIBhwdYBXRNkxCUJmbq4zCmCL3FER98PFMJE
+
+{
+  "ToEmails": "lltnhan@cmctssg.info",
+  "Subject": "Test Email",
+  "Body": "Xin chào đây là email không xài template",
+  "Priority": "Low" 
+}
+###
+
+# Send Mail With File
+POST http://localhost:5000/api/email/send
+Content-Type: application/json
+
+{
+  "ToEmails": "leluthiennhan31@gmail.com;lltnhan@cmctssg.info",
+  "Subject": "Test Email with Attachment",
+  "TemplateId": "ET-001",
+  "Replacements": {
+    "Name": "Nhan",
+    "Message": "Xin chào đây là email ET-001 có kèm file"
+  },
+  "Attachments": [
+    {
+      "Base64": "YWFhYQ==",
+      "FileName": "file1.txt"
+    },
+    {
+      "Base64": "YmJjYg==",
+      "FileName": "file2.txt"
+    }
+  ]
+}
+###
+
+# Send Mail With CC
+POST http://localhost:5000/api/email/send
+Content-Type: application/json
+
+{
+  "ToEmails": "leluthiennhan31@gmail.com",
+  "Subject": "Test Email with CC",
+  "TemplateId": "ET-001",
+  "Replacements": {
+    "Name": "Nhan",
+    "Message": "Xin chào đây là email ET-001 có kèm file"
+  },
+  "Attachments": [
+    {
+      "Base64": "YWFhYQ==",
+      "FileName": "file1.txt"
+    },
+    {
+      "Base64": "YmJjYg==",
+      "FileName": "file2.txt"
+    }
+  ],
+  "CcEmails": "leluthiennhan30@gmail.com;lltnhan@cmctssg.info"
+}
+###
+
+# Send Mail With BCC
+POST http://localhost:5000/api/email/send
+Content-Type: application/json
+
+{
+  "ToEmails": "leluthiennhan31@gmail.com",
+  "Subject": "Test Email with BCC",
+  "TemplateId": "ET-001",
+  "Replacements": {
+    "Name": "Nhan",
+    "Message": "Xin chào đây là email ET-001 có kèm file"
+  },
+  "Attachments": [
+    {
+      "Base64": "YWFhYQ==",
+      "FileName": "file1.txt"
+    },
+    {
+      "Base64": "YmJjYg==",
+      "FileName": "file2.txt"
+    }
+  ],
+  "BccEmails": "leluthiennhan32@gmail.com;lltnhan02@cmctssg.info"
+}
+###
+
+# Send Mail With Dynamic SMTP
+POST http://localhost:5000/api/email/send
+Content-Type: application/json
+
+{
+  "ToEmails": "leluthiennhan31@gmail.com",
+  "Subject": "Test Email with Dynamic SMTP",
+  "TemplateId": "ET-001",
+  "Replacements": {
+    "Name": "Nhan",
+    "Message": "Xin chào đây là email ET-001 có kèm file"
+  },
+  "Attachments": [
+    {
+      "Base64": "YWFhYQ==",
+      "FileName": "file1.txt"
+    },
+    {
+      "Base64": "YmJjYg==",
+      "FileName": "file2.txt"
+    }
+  ],
+  "SmtpAddress": "smtp.gmail.com",
+  "PortNumber": 587,
+  "EmailFrom": "nhanleluthien@gmail.com",
+  "Password": "bpez lbii padc dzye"
+}
+

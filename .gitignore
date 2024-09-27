@@ -55,4 +55,4 @@ Desktop.ini
 # Migrations
 **/Migrations/
 
-**/Store
+**/src/Store

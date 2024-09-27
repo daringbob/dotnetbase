@@ -16,6 +16,7 @@ namespace src.Models
         public int? ParentID { get; set; }
         public string? DataSource { get; set; }
         public required string ServerRelativeUrl { get; set; }
+        public string? downloadUrl { get; set; }
         public bool IsFolder { get; set; } = false;
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using src.Repositories.Store;
@@ -16,7 +17,18 @@ namespace src.Controllers
             _storeRepo = storeRepo;
         }
 
+        private bool CheckServerRelativeUrlValidity(string serverRelativeUrl)
+        {
+            if (!serverRelativeUrl.StartsWith("/") || (serverRelativeUrl.EndsWith("/") && serverRelativeUrl.Length > 1))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         // POST: api/store/create-file
+        [AllowAnonymous]
         [HttpPost("create-file")]
         public async Task<IActionResult> CreateFile(string serverRelativeUrl, string fileName, int? refID, string? dataSource, IFormFile file)
         {
@@ -26,8 +38,11 @@ namespace src.Controllers
                 {
                     return BadRequest("No file uploaded.");
                 }
-
-                var storeRecord = await _storeRepo.CreateFile(serverRelativeUrl, fileName, refID, dataSource, file);
+                if (!CheckServerRelativeUrlValidity(serverRelativeUrl) || fileName.Contains("/"))
+                {
+                    return BadRequest("Invalid serverRelativeUrl.");
+                }
+                var storeRecord = await _storeRepo.CreateFile(serverRelativeUrl, fileName, refID, dataSource, file.OpenReadStream());
                 return Ok(storeRecord);
             }
             catch (Exception ex)
@@ -58,7 +73,7 @@ namespace src.Controllers
             try
             {
                 var fileBytes = _storeRepo.GetFileContent(serverRelativeUrl);
-                
+
                 return File(fileBytes, "application/octet-stream");
             }
             catch (FileNotFoundException ex)
@@ -128,6 +143,27 @@ namespace src.Controllers
             {
                 _storeRepo.DeleteFolder(serverRelativeUrl);
                 return Ok("Folder deleted successfully.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost("upload-test")]
+        public async Task<IActionResult> UploadTest(IFormFile file)
+        {
+            try
+            {
+                if (file == null || file.Length == 0)
+                {
+                    return BadRequest("No file uploaded.");
+                }
+
+                using var stream = file.OpenReadStream();
+                var fileName = await _storeRepo.UploadTest(stream, file.FileName);
+                return Ok(fileName);
             }
             catch (Exception ex)
             {

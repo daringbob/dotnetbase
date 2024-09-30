@@ -175,12 +175,5 @@ RecurringJob.AddOrUpdate<SendScheduledEmailJob>(
     }
 );
 
-// Initialize the application
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var storeRepository = services.GetRequiredService<IStoreRepository>();
-    await storeRepository.InitStore();
-}
 
 app.Run();

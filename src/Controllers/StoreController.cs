@@ -19,7 +19,7 @@ namespace src.Controllers
 
         private bool CheckServerRelativeUrlValidity(string serverRelativeUrl)
         {
-            if (!serverRelativeUrl.StartsWith("/") || (serverRelativeUrl.EndsWith("/") && serverRelativeUrl.Length > 1))
+            if (!serverRelativeUrl.StartsWith('/') || (serverRelativeUrl.EndsWith('/') && serverRelativeUrl.Length > 1))
             {
                 return false;
             }
@@ -28,7 +28,6 @@ namespace src.Controllers
         }
 
         // POST: api/store/create-file
-        [AllowAnonymous]
         [HttpPost("create-file")]
         public async Task<IActionResult> CreateFile(string serverRelativeUrl, string fileName, int? refID, string? dataSource, IFormFile file)
         {
@@ -38,47 +37,12 @@ namespace src.Controllers
                 {
                     return BadRequest("No file uploaded.");
                 }
-                if (!CheckServerRelativeUrlValidity(serverRelativeUrl) || fileName.Contains("/"))
+                if (!CheckServerRelativeUrlValidity(serverRelativeUrl) || fileName.Contains('/'))
                 {
                     return BadRequest("Invalid serverRelativeUrl.");
                 }
                 var storeRecord = await _storeRepo.CreateFile(serverRelativeUrl, fileName, refID, dataSource, file.OpenReadStream());
                 return Ok(storeRecord);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        // POST: api/store/create-folder
-        [HttpPost("create-folder")]
-        public IActionResult CreateFolder(string serverRelativeUrl, int? refID, string? dataSource)
-        {
-            try
-            {
-                var storeRecord = _storeRepo.CreateFolder(serverRelativeUrl, refID, dataSource);
-                return Ok(storeRecord);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        // GET: api/store/get-file-content
-        [HttpGet("get-file-content")]
-        public IActionResult GetFileContent(string serverRelativeUrl)
-        {
-            try
-            {
-                var fileBytes = _storeRepo.GetFileContent(serverRelativeUrl);
-
-                return File(fileBytes, "application/octet-stream");
-            }
-            catch (FileNotFoundException ex)
-            {
-                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -92,6 +56,10 @@ namespace src.Controllers
         {
             try
             {
+                if (!CheckServerRelativeUrlValidity(serverRelativeUrl))
+                {
+                    return BadRequest("Invalid serverRelativeUrl.");
+                }
                 var fileInfo = _storeRepo.GetFileInfo(serverRelativeUrl);
                 if (fileInfo == null)
                 {
@@ -105,28 +73,17 @@ namespace src.Controllers
             }
         }
 
-        // GET: api/store/get-folder-content
-        [HttpGet("get-folder-info")]
-        public IActionResult GetFolderInfo(string serverRelativeUrl, int? refID, string? dataSource)
-        {
-            try
-            {
-                var filesInfo = _storeRepo.GetFolderInfo(serverRelativeUrl, refID, dataSource);
-                return Ok(filesInfo);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         // DELETE: api/store/delete-file
         [HttpDelete("delete-file")]
-        public IActionResult DeleteFile(string serverRelativeUrl)
+        public async Task<IActionResult> DeleteFile(string serverRelativeUrl)
         {
             try
             {
-                _storeRepo.DeleteFile(serverRelativeUrl);
+                if (!CheckServerRelativeUrlValidity(serverRelativeUrl))
+                {
+                    return BadRequest("Invalid serverRelativeUrl.");
+                }
+                await _storeRepo.DeleteFile(serverRelativeUrl);
                 return Ok("File deleted successfully.");
             }
             catch (Exception ex)
@@ -135,40 +92,5 @@ namespace src.Controllers
             }
         }
 
-        // DELETE: api/store/delete-folder
-        [HttpDelete("delete-folder")]
-        public IActionResult DeleteFolder(string serverRelativeUrl)
-        {
-            try
-            {
-                _storeRepo.DeleteFolder(serverRelativeUrl);
-                return Ok("Folder deleted successfully.");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPost("upload-test")]
-        public async Task<IActionResult> UploadTest(IFormFile file)
-        {
-            try
-            {
-                if (file == null || file.Length == 0)
-                {
-                    return BadRequest("No file uploaded.");
-                }
-
-                using var stream = file.OpenReadStream();
-                var fileName = await _storeRepo.UploadTest(stream, file.FileName);
-                return Ok(fileName);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
     }
 }

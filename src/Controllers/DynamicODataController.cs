@@ -133,5 +133,16 @@ namespace src.Controllers
         public RolePermissionsController(AppDbContext context)
             : base(context) { }
     }
+    public class TestsController : DynamicODataController<Test>
+    {
+        public TestsController(AppDbContext context)
+            : base(context) { }
+    }
+
+    public class TestDetailsController : DynamicODataController<TestDetail>
+    {
+        public TestDetailsController(AppDbContext context)
+            : base(context) { }
+    }
 
 }

@@ -20,6 +20,8 @@ namespace src.Data
         public DbSet<EmailTemplate> EmailTemplates { get; set; }
         public DbSet<EmailTracking> EmailTrackings { get; set; }
         public DbSet<EmailTestList> EmailTestLists { get; set; }
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<TestDetail> TestDetails { get; set; }
 
         private ExecuteTriggerEvent HandleTriggers()
         {

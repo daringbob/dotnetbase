@@ -74,32 +74,31 @@ namespace src.Repositories.Auth
             return await _context.Accounts.AnyAsync(a => a.UserName == username);
         }
 
-        public async Task<bool> RegisterAsync(RegisterDto registerDto)
+        public async Task<User?> RegisterAsync(RegisterDto registerDto)
         {
             string salt = _config.GetValue<string>("PasswordSalt") ?? "";
 
             var passwordHash = PasswordHasherExtensions.HashPasword(registerDto.Password, salt);
 
+            var newUser = new User
+            {
+                Email = registerDto.UserName,
+                IsInputInformation = false,
+            };
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
             _context.Accounts.Add(
                 new Account
                 {
                     UserName = registerDto.UserName,
                     Password = passwordHash,
-                    UserId = registerDto.UserId
+                    UserId = newUser.Id,
+                    IsActive = true
                 }
             );
+            await _context.SaveChangesAsync();
+            return newUser;
 
-            _context.Users.Update(
-                new User
-                {
-                    Id = registerDto.UserId,
-                    RoleId = registerDto.RoleId
-                }
-            );
-
-            var result = await _context.SaveChangesAsync();
-
-            return result > 0;
         }
 
         public async Task<bool> ChangePassword(Account account, string newPassword)

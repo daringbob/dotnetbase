@@ -24,7 +24,9 @@ namespace src.Configurations
                     Code = "AD001",
                     FirstName = "ADMIN",
                     LastName = "SYS",
-                    FullName = "ADMIN SYS"
+                    FullName = "ADMIN SYS",
+                    IsActive = true,
+                    IsInputInformation = true,
                 }
             );
 

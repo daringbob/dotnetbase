@@ -35,12 +35,20 @@ namespace src.Utilities.Filebase
             var client = new FirebaseAuthClient(config);
 
             // Authenticate the user and cache the credential
-            var userCredential = await client.SignInWithEmailAndPasswordAsync(
-                _configuration["Firebase:Email"],
-                _configuration["Firebase:Password"]
-            );
+            try
+            {
+                var userCredential = await client.SignInWithEmailAndPasswordAsync(
+                  _configuration["Firebase:Email"],
+                  _configuration["Firebase:Password"]
+              );
 
-            return userCredential;
+                return userCredential;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+
         }
 
         // Retrieve the user credential (cached)
@@ -122,6 +130,40 @@ namespace src.Utilities.Filebase
             }
         }
 
+        public async Task<FirebaseMetaData> GetMetaDataAsync(string path)
+        {
+            // Get the cached user credential
+            var userCredential = await GetUserCredentialAsync();
+
+            // Get Firebase token
+            var firebaseToken = await userCredential.User.GetIdTokenAsync();
+
+            // Set up Firebase Storage options with the token
+            var token = await userCredential.User.GetIdTokenAsync();
+            var firebaseStorage = new FirebaseStorage(
+            _configuration["Firebase:StorageBucket"], // The Firebase storage bucket
+            new FirebaseStorageOptions
+            {
+                AuthTokenAsyncFactory = () => Task.FromResult(token), // Use token for auth
+                ThrowOnCancel = true // Handle cancellation
+            }
+            ).Child(path);
+
+
+
+            try
+            {
+                // Try to get metadata of the file/folder
+                var metaData = await firebaseStorage.GetMetaDataAsync();
+                return metaData;
+            }
+            catch (Exception ex)
+            {
+                // If an exception occurs, it means the path does not exist
+                return null;
+            }
+        }
+
         public async Task<bool> CheckIfPathExistsInFirebaseAsync(string path)
         {
             // Get the cached user credential
@@ -151,6 +193,7 @@ namespace src.Utilities.Filebase
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Error checking path: {ex.Message}");
                 // If an exception occurs, it means the path does not exist
                 return false;
             }

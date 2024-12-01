@@ -83,6 +83,7 @@ namespace src.Repositories.Auth
             var newUser = new User
             {
                 Email = registerDto.UserName,
+                IsActive = true,
                 IsInputInformation = false,
             };
             _context.Users.Add(newUser);

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using src.Repositories.Store;
+using src.Utilities.Filebase;
 
 namespace src.Controllers
 {
@@ -11,10 +12,12 @@ namespace src.Controllers
     public class StoreController : ControllerBase
     {
         private readonly IStoreRepository _storeRepo;
+        private readonly IFirebaseService _firebaseService;
 
-        public StoreController(IStoreRepository storeRepo)
+        public StoreController(IStoreRepository storeRepo, IFirebaseService firebaseService)
         {
             _storeRepo = storeRepo;
+            _firebaseService = firebaseService;
         }
 
         private bool CheckServerRelativeUrlValidity(string serverRelativeUrl)
@@ -52,7 +55,7 @@ namespace src.Controllers
 
         // GET: api/store/get-file-info
         [HttpGet("get-file-info")]
-        public IActionResult GetFileInfo(string serverRelativeUrl)
+        public async Task<IActionResult> GetFileInfo(string serverRelativeUrl)
         {
             try
             {
@@ -60,7 +63,7 @@ namespace src.Controllers
                 {
                     return BadRequest("Invalid serverRelativeUrl.");
                 }
-                var fileInfo = _storeRepo.GetFileInfo(serverRelativeUrl);
+                var fileInfo = await _storeRepo.GetFileInfo(serverRelativeUrl);
                 if (fileInfo == null)
                 {
                     return NotFound("File not found.");

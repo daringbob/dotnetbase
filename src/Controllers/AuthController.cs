@@ -84,7 +84,6 @@ namespace src.Controllers
             return Ok(response);
         }
 
-        [Authorize]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerData)
         {
@@ -94,14 +93,39 @@ namespace src.Controllers
                 return BadRequest("Username already taken!");
             }
 
-            var isRegisted = await _authRepo.RegisterAsync(registerData);
-
-            if (!isRegisted)
+            try
             {
+                var newUser = await _authRepo.RegisterAsync(registerData);
+                var token = _authRepo.GenerateToken(registerData.UserName, newUser?.Roles?.Title);
+                if (token == null)
+                {
+                    return BadRequest("Invalid Attempt!");
+                }
+                var obj = new UserRefreshToken
+                {
+                    RefreshToken = token.RefreshToken,
+                    UserName = registerData.UserName
+                };
+                _authRepo.AddUserRefreshTokens(obj);
+                var account = await _authRepo.GetAccountByUserName(registerData.UserName);
+                var permission = await _authRepo.GetPermissionsOfUser(account.UserId);
+                var response = new LoginResDto
+                {
+                    Token = token,
+                    Account = _mapper.Map<AccountDto>(account),
+                    Permission = permission,
+                    User = newUser
+                };
+
+                return Ok(response);
+            }
+            catch (System.Exception)
+            {
+
                 return BadRequest("Failed to register account.");
             }
 
-            return Ok("Account registered successfully.");
+
         }
 
         [Authorize]

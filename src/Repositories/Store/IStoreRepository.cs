@@ -8,7 +8,7 @@ namespace src.Repositories.Store
 
         bool CheckExists(string serverRelativeUrl);
         Task<StoreRecord> CreateFile(string serverRelativeUrl, string fileName, int? refID, string? dataSource, Stream stream);
-        StoreRecord GetFileInfo(string serverRelativeUrl);
+        Task<StoreRecord> GetFileInfo(string serverRelativeUrl);
         Task DeleteFile(string serverRelativeUrl);
     }
 }

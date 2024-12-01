@@ -83,11 +83,12 @@ namespace src.Repositories.Store
             return await _context.StoreRecords.FirstOrDefaultAsync(r => r.ServerRelativeUrl == serverRelativeUrl);
         }
 
-        public StoreRecord GetFileInfo(string serverRelativeUrl)
+        public async Task<StoreRecord> GetFileInfo(string serverRelativeUrl)
         {
             if (CheckExists(serverRelativeUrl))
             {
-                return _context.StoreRecords.FirstOrDefault(r => r.ServerRelativeUrl == serverRelativeUrl);
+                var store = await _context.StoreRecords.FirstOrDefaultAsync(r => r.ServerRelativeUrl == serverRelativeUrl);
+                return store;
             }
             else
             {

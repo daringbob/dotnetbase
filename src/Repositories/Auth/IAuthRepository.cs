@@ -11,7 +11,7 @@ namespace src.Repositories.Auth
         Task<List<Permission?>> GetPermissionsOfUser(int userId);
         bool ValidatePassword(string reqPassword, string dbPassword);
         Task<bool> IsUsernameTaken(string username);
-        Task<bool> RegisterAsync(RegisterDto registerDto);
+        Task<User?> RegisterAsync(RegisterDto registerDto);
         Task<bool> ChangePassword(Account account, string newPassword);
         Token? GenerateToken(string userName, string? role);
         Token? GenerateRefreshToken(string userName, string? role);

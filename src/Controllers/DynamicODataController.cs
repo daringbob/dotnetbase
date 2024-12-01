@@ -87,8 +87,6 @@ namespace src.Controllers
         }
     }
 
-    public class UsersController(AppDbContext context) : DynamicODataController<User>(context) { }
-
     public class AccountsController : DynamicODataController<Account>
     {
         public AccountsController(AppDbContext context)
@@ -144,5 +142,50 @@ namespace src.Controllers
         public TestDetailsController(AppDbContext context)
             : base(context) { }
     }
+
+    public class MessageBoxController : DynamicODataController<MessageBox>
+    {
+        public MessageBoxController(AppDbContext context)
+            : base(context) { }
+    }
+
+    public class MessagesController : DynamicODataController<Messages>
+    {
+        public MessagesController(AppDbContext context)
+            : base(context) { }
+    }
+
+    public class JobsController : DynamicODataController<Job>
+    {
+        public JobsController(AppDbContext context)
+            : base(context) { }
+    }
+
+    public class BookmarksController : DynamicODataController<Bookmarks>
+    {
+        public BookmarksController(AppDbContext context)
+            : base(context) { }
+    }
+
+    public class CriteriasController : DynamicODataController<Criterias>
+    {
+        public CriteriasController(AppDbContext context)
+            : base(context) { }
+    }
+
+    public class JobApplicationsController : DynamicODataController<JobApplications>
+    {
+        public JobApplicationsController(AppDbContext context)
+            : base(context) { }
+    }
+
+    public class UsersController : DynamicODataController<Users>
+    {
+        public UsersController(AppDbContext context)
+            : base(context) { }
+    }
+
+
+    
 
 }

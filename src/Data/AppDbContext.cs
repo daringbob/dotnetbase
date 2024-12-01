@@ -10,7 +10,7 @@ namespace src.Data
         //GENERAL
 
         public DbSet<Roles> Roles { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Users> Users { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
 
@@ -22,6 +22,17 @@ namespace src.Data
         public DbSet<EmailTestList> EmailTestLists { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<TestDetail> TestDetails { get; set; }
+
+        public DbSet<MessageBox> MessageBox { get; set; }
+        public DbSet<Messages> Messages { get; set; }
+
+        public DbSet<Job> Jobs { get; set; }
+
+        public DbSet<Bookmarks> Bookmarks { get; set; }
+
+        public DbSet<Criterias> Criterias { get; set; }
+
+        public DbSet<JobApplications> JobApplications { get; set; }
 
         private ExecuteTriggerEvent HandleTriggers()
         {

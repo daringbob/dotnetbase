@@ -7,10 +7,10 @@ namespace src.Models
     {
         [Key]
         public int Id { get; set; }
-       
-       [ForeignKey("User")]
+
+        [ForeignKey("User")]
         public int UserId { get; set; }
-        public Users? User { get; set; }
+        public User? User { get; set; }
 
         [ForeignKey("Jobs")]
         public int JobId { get; set; }
@@ -20,5 +20,5 @@ namespace src.Models
         public DateTime Modified { get; set; }
     }
 
-    
+
 }

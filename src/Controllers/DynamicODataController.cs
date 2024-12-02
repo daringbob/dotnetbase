@@ -87,6 +87,12 @@ namespace src.Controllers
         }
     }
 
+    public class UsersController : DynamicODataController<User>
+    {
+        public UsersController(AppDbContext context)
+            : base(context) { }
+    }
+
     public class AccountsController : DynamicODataController<Account>
     {
         public AccountsController(AppDbContext context)
@@ -179,13 +185,5 @@ namespace src.Controllers
             : base(context) { }
     }
 
-    public class UsersController : DynamicODataController<Users>
-    {
-        public UsersController(AppDbContext context)
-            : base(context) { }
-    }
-
-
-    
 
 }

@@ -6,6 +6,7 @@ namespace src.Models
     {
         public int Id { get; set; }
         public string? Code { get; set; }
+        public string? Gender { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? FullName { get; set; }
@@ -13,13 +14,29 @@ namespace src.Models
         public string? Phone { get; set; }
         public bool? IsActive { get; set; } = false;
         public bool? IsInputInformation { get; set; } = false;
-        public string? Gender { get; set; }
 
-        public string? WorkingModel { get; set; }
-        public string? JobType { get; set; }
-        public string? Experience { get; set; }
-        public string? JobTitle { get; set; }
-        public string? UserType { get; set; }
+        [ForeignKey("WorkingModel")]
+        public int? WorkingModelId { get; set; }
+        public Criterias? WorkingModel { get; set; }
+
+        [ForeignKey("JobType")]
+        public int? JobTypeId { get; set; }
+        public Criterias? JobType { get; set; }
+        [ForeignKey("Experience")]
+        public int? ExperienceId { get; set; }
+        public Criterias? Experience { get; set; }
+        [ForeignKey("JobTitle")]
+        public int? JobTitleId { get; set; }
+        public Criterias? JobTitle { get; set; }
+        public string? About { get; set; }
+
+        public string? WorkingHours { get; set; }
+
+        public string UserType { get; set; } = "Candidate";
+
+        public DateTime LastAccessTime { get; set; }
+
+        public string? ImageUrl { get; set; }
 
         [ForeignKey("Roles")]
         public int RoleId { get; set; } = 2;

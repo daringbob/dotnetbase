@@ -10,7 +10,7 @@ namespace src.Data
         //GENERAL
 
         public DbSet<Roles> Roles { get; set; }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
 

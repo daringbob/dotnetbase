@@ -15,11 +15,11 @@ namespace src.Models
 
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public Users? User { get; set; }
-    
+        public User? User { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }
 
-    
+
 }

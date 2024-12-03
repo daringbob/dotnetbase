@@ -13,6 +13,11 @@ namespace src.Models
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
+
+        public static implicit operator Criterias(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     

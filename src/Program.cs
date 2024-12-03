@@ -13,9 +13,12 @@ using Hangfire;
 using Hangfire.SqlServer;
 using src.Utilities.Filebase;
 using src.Repositories.UnitOfWork;
+using src.Hubs;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSignalR();
 // sqlserver
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -152,6 +155,8 @@ app.UseCors("CorsPolicy");
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
+
+app.MapHub<ChatHub>("/chatHub");
 
 // Thêm trang Dashboard của Hangfire
 app.UseHangfireDashboard();

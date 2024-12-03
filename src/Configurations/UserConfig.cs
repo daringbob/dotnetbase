@@ -27,6 +27,18 @@ namespace src.Configurations
                     FullName = "ADMIN SYS",
                     IsActive = true,
                     IsInputInformation = true,
+                    UserType = "Recruiter"
+                },
+                new User
+                {
+                    Id = 2,
+                    Code = "AD002",
+                    FirstName = "ADMIN 002",
+                    LastName = "SYS 002",
+                    FullName = "ADMIN SYS 002",
+                    IsActive = true,
+                    IsInputInformation = true,
+                    UserType = "Candidate"
                 }
             );
 

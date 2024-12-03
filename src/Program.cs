@@ -18,7 +18,13 @@ using src.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR().AddJsonProtocol(options =>
+{
+
+    options.PayloadSerializerOptions.PropertyNamingPolicy = null; // Không thay đổi tên
+    options.PayloadSerializerOptions.DictionaryKeyPolicy = null; // Không thay đổi tên key trong dictionary
+});
+
 // sqlserver
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))

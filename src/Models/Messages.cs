@@ -11,12 +11,19 @@ namespace src.Models
         public required string Message { get; set; }
         public string? IsSystemMessage { get; set; }
 
-        public int SenderId { get; set; }
+        [ForeignKey("Recruiter")]
+        public int RecruiterId { get; set; }
+        public User? Recruiter { get; set; }
+        [ForeignKey("Candidate")]
+        public int CandidateId { get; set; }
+        public User? Candidate { get; set; }
 
-        public int ReceiverId { get; set; }
+        [ForeignKey("Sender")]
+        public int SenderId { get; set; }
+        public User? Sender { get; set; }
 
         [ForeignKey("Jobs")]
-        public int JobId { get; set; }
+        public int? JobId { get; set; }
         public Job? Jobs { get; set; }
 
         public DateTime Created { get; set; }

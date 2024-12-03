@@ -18,10 +18,8 @@ namespace src.Configurations
                     Description = "Develop and maintain software applications.",
                     Requirement = "C#, .NET, SQL",
                     JobTypeId = 2,
-                    Experience = 2,
-                    JobTitle = 1,
-                    Created = DateTime.Now,
-                    Modified = DateTime.Now
+                    ExperienceId = 2,
+                    JobTitleId = 1
                 }
             );
         }

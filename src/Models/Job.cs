@@ -7,7 +7,7 @@ namespace src.Models
     {
         [Key]
         public int Id { get; set; }
-        public required string  Locations { get; set; }
+        public required string Locations { get; set; }
 
         public required double MinSalary { get; set; }
         public required double MaxSalary { get; set; }
@@ -17,7 +17,7 @@ namespace src.Models
 
         public required string Requirement { get; set; }
 
-         [ForeignKey("WorkingModel")]
+        [ForeignKey("WorkingModel")]
         public int? WorkingModelId { get; set; }
         public Criterias? WorkingModel { get; set; }
 
@@ -30,10 +30,13 @@ namespace src.Models
         [ForeignKey("JobTitle")]
         public int? JobTitleId { get; set; }
         public Criterias? JobTitle { get; set; }
+        [ForeignKey("Recruiter")]
+        public int RecruiterId { get; set; }
+        public User? Recruiter { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }
 
-    
+
 }

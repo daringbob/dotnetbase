@@ -41,6 +41,18 @@ namespace src.Configurations
                     IsInputInformation = true,
                     UserType = "Candidate",
                     Gender = "Female"
+                },
+                new User
+                {
+                    Id = 3,
+                    Code = "Recruiter001",
+                    FirstName = "Recruiter",
+                    LastName = "003",
+                    FullName = "Recruiter001",
+                    IsActive = true,
+                    IsInputInformation = true,
+                    UserType = "Recruiter",
+                    Gender = "Female"
                 }
             );
 

@@ -13,8 +13,17 @@ using Hangfire;
 using Hangfire.SqlServer;
 using src.Utilities.Filebase;
 using src.Repositories.UnitOfWork;
+using src.Hubs;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSignalR().AddJsonProtocol(options =>
+{
+
+    options.PayloadSerializerOptions.PropertyNamingPolicy = null; // Không thay đổi tên
+    options.PayloadSerializerOptions.DictionaryKeyPolicy = null; // Không thay đổi tên key trong dictionary
+});
 
 // sqlserver
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -152,6 +161,8 @@ app.UseCors("CorsPolicy");
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
+
+app.MapHub<ChatHub>("/chatHub");
 
 // Thêm trang Dashboard của Hangfire
 app.UseHangfireDashboard();

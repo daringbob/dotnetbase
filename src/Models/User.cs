@@ -38,6 +38,12 @@ namespace src.Models
 
         public string? ImageUrl { get; set; }
 
+        public string? CompanyName { get; set; }
+        public string? CompanyAddress { get; set; }
+        public string? CompanyLocation { get; set; }
+        public string? CompanyDescription { get; set; }
+        public string? CompanyEmail { get; set; }
+        
         [ForeignKey("Roles")]
         public int RoleId { get; set; } = 2;
         public Roles? Roles { get; set; }

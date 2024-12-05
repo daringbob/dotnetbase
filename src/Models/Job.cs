@@ -34,6 +34,8 @@ namespace src.Models
         public int RecruiterId { get; set; }
         public User? Recruiter { get; set; }
 
+        public Boolean IsActive { get; set; } = true;
+
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }

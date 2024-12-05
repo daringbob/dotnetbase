@@ -56,4 +56,4 @@ Desktop.ini
 **/Migrations/
 
 **/src/Store
-**/src/appsettings.json
+src/appsettings.json

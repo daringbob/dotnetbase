@@ -51,7 +51,7 @@ namespace src.Configurations
                     SenderId = 2,
                     CandidateId = 2,
                     RecruiterId = 1,
-                    Message = "ABC",
+                    Message = "ADMIN SYS has accepted the job application.",
                     IsSystemMessage = true,
                     JobId = 1
                 }

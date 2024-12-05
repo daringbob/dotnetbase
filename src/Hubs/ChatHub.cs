@@ -48,8 +48,8 @@ namespace src.Hubs
             }
 
             var groupName = $"Recruiter-{sendMessage.RecruiterId}-Candidate-{sendMessage.CandidateId}";
-            var message = await _context.Messages.Include(m => m.Sender).FirstOrDefaultAsync(m => m.Id == sendMessage.NewMessageId);
-            var messageBox = await _context.MessageBox.Include(mb => mb.LastMessage).FirstOrDefaultAsync(mb => mb.Id == sendMessage.MessageBoxId);
+            var message = await _context.Messages.Include(m => m.Sender).Include(m => m.Recruiter).FirstOrDefaultAsync(m => m.Id == sendMessage.NewMessageId);
+            var messageBox = await _context.MessageBox.Include(mb => mb.LastMessage).Include(mb => mb.Recruiter).Include(mb => mb.Candidate).FirstOrDefaultAsync(mb => mb.Id == sendMessage.MessageBoxId);
             Console.WriteLine(groupName);
             // Gửi tin nhắn đến toàn bộ group
             await Clients.Group(groupName).SendAsync("SendMessageResp", message);

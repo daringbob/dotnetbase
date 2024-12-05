@@ -9,7 +9,7 @@ namespace src.Models
                 public int Id { get; set; }
 
                 public required string Message { get; set; }
-                public string? IsSystemMessage { get; set; }
+                public bool? IsSystemMessage { get; set; } = false;
 
                 [ForeignKey("Recruiter")]
                 public int RecruiterId { get; set; }
@@ -21,6 +21,9 @@ namespace src.Models
                 [ForeignKey("Sender")]
                 public int SenderId { get; set; }
                 public User? Sender { get; set; }
+                [ForeignKey("JobApplication")]
+                public int? JobApplicationId { get; set; }
+                public JobApplications? JobApplication { get; set; }
 
                 [ForeignKey("Jobs")]
                 public int? JobId { get; set; }

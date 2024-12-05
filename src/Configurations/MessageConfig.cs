@@ -44,6 +44,16 @@ namespace src.Configurations
                     RecruiterId = 1,
                     Message = "Hi",
                     JobId = 1
+                },
+                new Messages
+                {
+                    Id = 3,
+                    SenderId = 2,
+                    CandidateId = 2,
+                    RecruiterId = 1,
+                    Message = "ABC",
+                    IsSystemMessage = true,
+                    JobId = 1
                 }
             );
         }

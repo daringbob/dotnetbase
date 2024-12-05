@@ -27,7 +27,8 @@ namespace src.Configurations
                     FullName = "ADMIN SYS",
                     IsActive = true,
                     IsInputInformation = true,
-                    UserType = "Recruiter"
+                    UserType = "Recruiter",
+                    Gender = "Male"
                 },
                 new User
                 {
@@ -38,7 +39,8 @@ namespace src.Configurations
                     FullName = "ADMIN SYS 002",
                     IsActive = true,
                     IsInputInformation = true,
-                    UserType = "Candidate"
+                    UserType = "Candidate",
+                    Gender = "Female"
                 }
             );
 

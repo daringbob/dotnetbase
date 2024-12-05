@@ -23,9 +23,9 @@ namespace src.Configurations
                 new MessageBox
                 {
                     Id = 1,
-                    CandidateId = 1,
-                    RecruiterId = 2,
-                    LastMessageId = 2
+                    CandidateId = 2,
+                    RecruiterId = 1,
+                    LastMessageId = 3
                 }
             );
         }

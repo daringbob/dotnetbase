@@ -11,7 +11,6 @@ namespace src.Models
 
         public required double MinSalary { get; set; }
         public required double MaxSalary { get; set; }
-        public int ApplicantCount { get; set; }
 
         public required string Description { get; set; }
 

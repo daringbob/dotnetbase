@@ -9,6 +9,7 @@ namespace src.Configurations
         public void Configure(EntityTypeBuilder<Job> builder)
         {
             builder.HasOne(x => x.Recruiter).WithMany().HasForeignKey(x => x.RecruiterId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(x => x.Bookmarks).WithOne(x => x.Job).HasForeignKey(x => x.JobId).OnDelete(DeleteBehavior.NoAction);
             builder.HasData(
                 new Job
                 {

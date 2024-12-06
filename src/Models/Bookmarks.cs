@@ -12,9 +12,9 @@ namespace src.Models
         public int UserId { get; set; }
         public User? User { get; set; }
 
-        [ForeignKey("Jobs")]
         public int JobId { get; set; }
-        public Job? Jobs { get; set; }
+        [ForeignKey("JobId")]
+        public Job? Job { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }

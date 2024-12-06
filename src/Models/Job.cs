@@ -16,6 +16,13 @@ namespace src.Models
 
         public required string Requirement { get; set; }
 
+        [InverseProperty("Jobs")]
+        public List<JobApplications>? JobApplications { get; set; }
+
+
+        [InverseProperty("Job")]
+        public List<Bookmarks>? Bookmarks { get; set; }
+
         [ForeignKey("WorkingModel")]
         public int? WorkingModelId { get; set; }
         public Criterias? WorkingModel { get; set; }

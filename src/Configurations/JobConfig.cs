@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using src.Models;
+using Bogus;  // Thư viện Faker giả lập dữ liệu ngẫu nhiên
 
 namespace src.Configurations
 {
@@ -9,64 +10,25 @@ namespace src.Configurations
         public void Configure(EntityTypeBuilder<Job> builder)
         {
             builder.HasOne(x => x.Recruiter).WithMany().HasForeignKey(x => x.RecruiterId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasData(
-                new Job
-                {
-                    Id = 1,
-                    Locations = "Hồ Chí Minh",
-                    MinSalary = 10000000,
-                    MaxSalary = 20000000,
-                    Description = "Develop and maintain software applications.",
-                    Requirement = "C#, .NET, SQL",
-                    WorkingModelId = 11,
-                    JobTypeId = 2,
-                    ExperienceId = 3,
-                    JobTitleId = 1,
-                    RecruiterId = 1,
-                },
-                 new Job
-                 {
-                     Id = 2,
-                     Locations = "NewYork",
-                     MinSalary = 20000000,
-                     MaxSalary = 30000000,
-                     Description = "Develop and maintain software applications.",
-                     Requirement = "C#, .NET, SQL",
-                     WorkingModelId = 12,
-                     JobTypeId = 8,
-                     ExperienceId = 4,
-                     JobTitleId = 6,
-                     RecruiterId = 2,
-                 },
-                 new Job
-                 {
-                     Id = 3,
-                     Locations = "Hồ Chí Minh",
-                     MinSalary = 30000000,
-                     MaxSalary = 40000000,
-                     Description = "Develop and maintain software applications.",
-                     Requirement = "C#, .NET, SQL",
-                     WorkingModelId = 13,
-                     JobTypeId = 9,
-                     ExperienceId = 5,
-                     JobTitleId = 7,
-                     RecruiterId = 2,
-                 },
-                 new Job
-                 {
-                     Id = 4,
-                     Locations = "Hồ Chí Minh",
-                     MinSalary = 12000000,
-                     MaxSalary = 13000000,
-                     Description = "Develop and maintain software applications.",
-                     Requirement = "C#, .NET, SQL",
-                     WorkingModelId = 11,
-                     JobTypeId = 9,
-                     ExperienceId = 10,
-                     JobTitleId = 7,
-                     RecruiterId = 1,
-                 }
-            );
+
+            // Sử dụng Bogus để tạo dữ liệu ngẫu nhiên
+            var jobFaker = new Faker<Job>()
+                .RuleFor(x => x.Id, f => f.IndexFaker + 1)  // Id ngẫu nhiên
+                                                            // .RuleFor(x => x.Id, f => f.PickRandom(1, 2, 3))  // Id ngẫu nhiên
+                .RuleFor(x => x.Locations, f => f.Address.City())  // Tạo địa chỉ thành phố ngẫu nhiên
+                .RuleFor(x => x.MinSalary, f => f.Random.Int(1000000, 20000000))  // Mức lương tối thiểu ngẫu nhiên
+                .RuleFor(x => x.MaxSalary, f => f.Random.Int(20000000, 50000000))  // Mức lương tối đa ngẫu nhiên
+                .RuleFor(x => x.Description, f => f.Lorem.Sentence())  // Mô tả công việc ngẫu nhiên
+                .RuleFor(x => x.Requirement, f => f.Lorem.Words(5).ToString())  // Yêu cầu ngẫu nhiên
+                .RuleFor(x => x.WorkingModelId, f => f.Random.Int(1, 20))  // Working model id ngẫu nhiên
+                .RuleFor(x => x.JobTypeId, f => f.PickRandom(new[] { 2, 8, 9 }))
+                .RuleFor(x => x.ExperienceId, f => f.PickRandom(new[] { 3, 4, 5, 10 }))  // Experience id ngẫu nhiên
+                .RuleFor(x => x.JobTitleId, f => f.PickRandom(new[] { 1, 6, 7 }))  // Job title id ngẫu nhiên
+                .RuleFor(x => x.RecruiterId, f => f.PickRandom(new[] { 1, 3 }));  // Recruiter id ngẫu nhiên;  
+
+            // Tạo dữ liệu mẫu với vòng lặp
+            var jobs = jobFaker.Generate(100);  
+            builder.HasData(jobs);  // Đưa dữ liệu vào DBContext
         }
     }
 }

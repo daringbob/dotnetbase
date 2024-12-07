@@ -43,6 +43,8 @@ namespace src.Models
         public string? CompanyLocation { get; set; }
         public string? CompanyDescription { get; set; }
         public string? CompanyEmail { get; set; }
+
+        public string? GeoLocation { get; set; }
         
         [ForeignKey("Roles")]
         public int RoleId { get; set; } = 2;

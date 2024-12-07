@@ -28,7 +28,8 @@ namespace src.Configurations
                     IsActive = true,
                     IsInputInformation = true,
                     UserType = "Recruiter",
-                    Gender = "Male"
+                    Gender = "Male",
+                    GeoLocation = "{latitude: 21.028511,longitude: 105.804817, latitudeDelta: 0.05,longitudeDelta: 0.05}"
                 },
                 new User
                 {

@@ -19,15 +19,15 @@ namespace src.Configurations
                 .OnDelete(DeleteBehavior.NoAction);
 
             // init data, admin:admin
-            builder.HasData(
-                new MessageBox
-                {
-                    Id = 1,
-                    CandidateId = 2,
-                    RecruiterId = 1,
-                    LastMessageId = 3
-                }
-            );
+            // builder.HasData(
+            //     new MessageBox
+            //     {
+            //         Id = 1,
+            //         CandidateId = 2,
+            //         RecruiterId = 1,
+            //         LastMessageId = 3
+            //     }
+            // );
         }
     }
 }

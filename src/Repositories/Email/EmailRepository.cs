@@ -9,7 +9,7 @@ namespace src.Repositories.Email
 {
     public class EmailRepository : IEmailRepository
     {
-         private readonly AppDbContext _context;
+        private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
 
         public EmailRepository(AppDbContext context, IConfiguration configuration)
@@ -91,7 +91,7 @@ namespace src.Repositories.Email
                 IsTest = isTest,
                 RefId = refId,
                 DataSource = dataSource,
-                HasAttachment = hasAttachment 
+                HasAttachment = hasAttachment
             };
 
             _context.EmailTrackings.Add(emailTracking);
@@ -141,8 +141,8 @@ namespace src.Repositories.Email
                     ccEmails = CombineEmails(ccEmails, template.DefaultCcEmails);
                     bccEmails = CombineEmails(bccEmails, template.DefaultBccEmails);
                 }
-                
-                 // Lấy danh sách email test nếu isTest là true
+
+                // Lấy danh sách email test nếu isTest là true
                 List<string> emailTestList = new List<string>();
 
                 if (isTest == true)
@@ -215,7 +215,7 @@ namespace src.Repositories.Email
                         _ => MailPriority.Normal,
                     };
 
-                    
+
                     // Thêm email vào CC nếu thoả mãn điều kiện
                     if (validCcEmails.Any())
                     {
@@ -234,7 +234,7 @@ namespace src.Repositories.Email
                             mail.Bcc.Add(bccEmail);
                         }
                     }
-                    
+
 
                     if (attachments != null)
                     {
@@ -251,10 +251,11 @@ namespace src.Repositories.Email
 
                     using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber.Value))
                     {
+                        smtp.UseDefaultCredentials = false;
                         smtp.Credentials = new NetworkCredential(emailFrom, password);
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
-                }
+                    }
                 }
 
                 // Gọi hàm TrackEmailAsync để lưu vào EmailTracking, N

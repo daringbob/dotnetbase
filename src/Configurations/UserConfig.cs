@@ -53,7 +53,8 @@ namespace src.Configurations
                     IsActive = true,
                     IsInputInformation = true,
                     UserType = "Recruiter",
-                    Gender = "Female"
+                    Gender = "Female",
+                    GeoLocation = "{latitude: 23.10598, longitude: 72.926834, latitudeDelta: 0.05, longitudeDelta: 0.05}"
                 }
             );
 

@@ -20,9 +20,9 @@ namespace src.Configurations
                 .RuleFor(x => x.Deadline, f => f.Date.Future())  // Hạn nộp hồ sơ ngẫu nhiên
                 .RuleFor(x => x.Quantity, f => f.Random.Int(1, 10))  // Số lượng tuyển ngẫu nhiên
                 .RuleFor(x => x.WorkingHours, f => f.Lorem.Sentence())  // Thời gian làm việc ngẫu nhiên
-                .RuleFor(x => x.Gender, f => f.PickRandom(new[] { "Nam", "Nữ", "Không yêu cầu" }))  // Giới tính ngẫu nhiên
+                .RuleFor(x => x.Gender, f => f.PickRandom(new[] { "Male", "Female", "No require" }))  // Giới tính ngẫu nhiên
                 .RuleFor(x => x.Interest, f => f.Lorem.Sentence())  // Quyền lợi ngẫu nhiên
-                
+
 
                 .RuleFor(x => x.MinSalary, f => f.Random.Int(1000000, 20000000))  // Mức lương tối thiểu ngẫu nhiên
                 .RuleFor(x => x.MaxSalary, f => f.Random.Int(20000000, 50000000))  // Mức lương tối đa ngẫu nhiên

@@ -7,8 +7,8 @@ namespace src.Models
     {
         [Key]
         public int Id { get; set; }
-        public required string Locations { get; set; }
 
+        public required string Title { get; set; } // Tiêu đề bài đăng
         public required double MinSalary { get; set; }
         public required double MaxSalary { get; set; }
 
@@ -41,6 +41,18 @@ namespace src.Models
         public User? Recruiter { get; set; }
 
         public Boolean IsActive { get; set; } = true;
+
+        // Hạn nộp
+        public DateTime? Deadline { get; set; }
+        // Số lượng tuyển
+        public int? Quantity { get; set; }
+        // Thời gian làm việc
+        public string? WorkingHours { get; set; }
+        // Giới tính
+        public string? Gender { get; set; }
+
+        // Quyền lợi
+        public string? Interest { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }

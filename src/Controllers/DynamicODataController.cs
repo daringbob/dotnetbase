@@ -23,7 +23,7 @@ namespace src.Controllers
             _dbSet = _context.Set<TEntity>();
         }
 
-        [EnableQuery(PageSize = 2000)]
+        [EnableQuery(PageSize = 2000, MaxExpansionDepth = 3)]
         public virtual IActionResult Get()
         {
             return Ok(_dbSet);
